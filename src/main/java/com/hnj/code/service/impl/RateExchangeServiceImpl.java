@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -30,6 +31,15 @@ public class RateExchangeServiceImpl implements RateExchangeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RateExchangeServiceImpl.class);
 
+    private static final String IDR_CURRENCY = "IDR";
+    private static final String SUCCESS = "Success";
+
+    @Value("${rest.countries.api.endpoint}")
+    private String REST_COUNTRIES_API_ENDPOINT;
+
+    @Value("${fixer.io.api.endpoint}")
+    private String FIXER_DOT_IO_API_ENDPOINT;
+
     private final RateExchangeRepository rateExchangeRepository;
 
     @Autowired
@@ -37,14 +47,12 @@ public class RateExchangeServiceImpl implements RateExchangeService {
         this.rateExchangeRepository = rateExchangeRepository;
     }
 
-    private static final String IDR_CURRENCY = "IDR";
-    private static final String SUCCESS = "Success";
 
     @Override
     public RateExchangeResponse getExchangeRate(String countryName, String userEmail) {
         RateExchangeResponse rateExchangeResponse = new RateExchangeResponse();
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpGet httpGet = new HttpGet("https://restcountries.com/v3.1/name/" + countryName);
+            HttpGet httpGet = new HttpGet(REST_COUNTRIES_API_ENDPOINT + countryName);
             HttpResponse response = httpClient.execute(httpGet);
 
             if (response.getEntity() == null) {
@@ -75,7 +83,7 @@ public class RateExchangeServiceImpl implements RateExchangeService {
 
     private RateExchangeResponse getExchangeRateInIDR(CountryInfo countryInfo, RateExchangeResponse rateExchangeResponse, String userEmail) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpGet httpGet = new HttpGet("http://data.fixer.io/api/latest?access_key=794bdc56065d1ff19dc7bcbab2bebdbb");
+            HttpGet httpGet = new HttpGet(FIXER_DOT_IO_API_ENDPOINT);
             HttpResponse response = httpClient.execute(httpGet);
             if (response.getEntity() == null) {
                 LOGGER.error("fixer.io Current currency exchange information not found");
