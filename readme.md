@@ -1,0 +1,12 @@
+## Technologies used
+- Java 8
+- Spring Boot
+- Spring Security
+- HttpClients
+- OAuth
+- JWT [JSON Web Token]
+- JUnit
+- Spring Data JPA [Hibernate]
+- MYSQL
+- Logback
+- Maven
