@@ -1,7 +1,6 @@
 package com.hnj.code.controller;
 
 import com.hnj.code.config.JwtTokenUtil;
-import com.hnj.code.model.User;
 import com.hnj.code.model.Response.JwtResponse;
 import com.hnj.code.model.Response.RegistrationResponse;
 import com.hnj.code.model.request.UserRequest;
@@ -36,14 +35,7 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public RegistrationResponse saveUser(@RequestBody UserRequest userRequest) throws Exception {
-        RegistrationResponse registrationResponse = RegistrationResponse.builder().email(userRequest.getEmail()).status(false).build();
-        User daoUser = userDetailsService.save(userRequest);
-
-        if (daoUser.getId() != null) {
-            registrationResponse.setMessage("Success");
-            registrationResponse.setStatus(true);
-        }
-        return registrationResponse;
+        return userDetailsService.save(userRequest);
     }
 
     private void authenticate(String username, String password) throws Exception {

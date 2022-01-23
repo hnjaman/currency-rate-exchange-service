@@ -2,6 +2,7 @@ package com.hnj.code.service;
 
 import java.util.ArrayList;
 
+import com.hnj.code.model.Response.RegistrationResponse;
 import com.hnj.code.model.request.UserRequest;
 import com.hnj.code.repository.UserRepository;
 import com.hnj.code.model.User;
@@ -35,10 +36,18 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
-    public User save(UserRequest user) {
+    public RegistrationResponse save(UserRequest userRequest) {
+        RegistrationResponse registrationResponse = RegistrationResponse.builder().email(userRequest.getEmail()).status(false).build();
         User newUser = new User();
-        newUser.setUsername(user.getEmail());
-        newUser.setPassword(bcryptEncoder.encode(user.getPass()));
-        return userRepository.save(newUser);
+        newUser.setUsername(userRequest.getEmail());
+        newUser.setPassword(bcryptEncoder.encode(userRequest.getPass()));
+        newUser = userRepository.save(newUser);
+
+        if (newUser.getId() != null) {
+            registrationResponse.setMessage("Success");
+            registrationResponse.setStatus(true);
+        }
+
+        return registrationResponse;
     }
 }
