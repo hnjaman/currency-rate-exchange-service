@@ -98,26 +98,31 @@ public class RateExchangeServiceImpl implements RateExchangeService {
 
             List<IDRExchangeRateResponse> exchangeRateToIDRS = new ArrayList<>();
 
-            for (Map.Entry<String, String> c : countryInfo.getCurrencies().getCurrency().entrySet()) {
-                Double exchangeIntoIDR = exchangeRate.getRates().getRatesMap().get(IDR_CURRENCY) / exchangeRate.getRates().getRatesMap().get(c.getKey());
-                ExchangeRateToIDR exchangeRateToIDR = ExchangeRateToIDR.builder()
-                        .userEmail(userEmail)
-                        .currency(c.getKey())
-                        .currencyFullName(c.getValue())
-                        .exchangeRateInIDR(exchangeIntoIDR)
-                        .requestedAt(new Date())
-                        .build();
+            if(exchangeRate.getSuccess()){
+                for (Map.Entry<String, String> c : countryInfo.getCurrencies().getCurrency().entrySet()) {
+                    Double exchangeIntoIDR = exchangeRate.getRates().getRatesMap().get(IDR_CURRENCY) / exchangeRate.getRates().getRatesMap().get(c.getKey());
+                    ExchangeRateToIDR exchangeRateToIDR = ExchangeRateToIDR.builder()
+                            .userEmail(userEmail)
+                            .currency(c.getKey())
+                            .currencyFullName(c.getValue())
+                            .exchangeRateInIDR(exchangeIntoIDR)
+                            .requestedAt(new Date())
+                            .build();
 
-                rateExchangeRepository.save(exchangeRateToIDR);
+                    rateExchangeRepository.save(exchangeRateToIDR);
 
-                exchangeRateToIDRS.add(IDRExchangeRateResponse.builder()
-                        .currency(exchangeRateToIDR.getCurrency())
-                        .currencyFullName(exchangeRateToIDR.getCurrencyFullName())
-                        .exchangeRateInIDR(exchangeRateToIDR.getExchangeRateInIDR())
-                        .build());
+                    exchangeRateToIDRS.add(IDRExchangeRateResponse.builder()
+                            .currency(exchangeRateToIDR.getCurrency())
+                            .currencyFullName(exchangeRateToIDR.getCurrencyFullName())
+                            .exchangeRateInIDR(exchangeRateToIDR.getExchangeRateInIDR())
+                            .build());
+                }
+                rateExchangeResponse.setExchangeRatesInIDR(exchangeRateToIDRS);
+                rateExchangeResponse.setMessage(SUCCESS);
+            } else {
+                rateExchangeResponse.setExchangeRatesInIDR(exchangeRateToIDRS);
+                rateExchangeResponse.setMessage(exchangeRateJsonString);
             }
-            rateExchangeResponse.setExchangeRatesInIDR(exchangeRateToIDRS);
-            rateExchangeResponse.setMessage(SUCCESS);
         } catch (IOException e) {
             LOGGER.error("Exception in getExchangeRateInIDR for ", countryInfo, e);
         }

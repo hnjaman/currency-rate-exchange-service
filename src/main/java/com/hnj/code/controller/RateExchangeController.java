@@ -27,7 +27,7 @@ public class RateExchangeController {
     }
 
     @GetMapping("/idr/rate/exchange/{countryName}")
-	public RateExchangeResponse getMaps(@PathVariable("countryName") String countryName, HttpServletRequest request){
+	public RateExchangeResponse getIDRExchangeRate(@PathVariable("countryName") String countryName, HttpServletRequest request){
         AuthenticatedUserInfo authenticatedUserInfo = jwtTokenUtil.getAuthUserInfo(request);
         if(authenticatedUserInfo.isAuthenticated()){
             return rateExchangeService.getExchangeRate(countryName, authenticatedUserInfo.getEmail());
