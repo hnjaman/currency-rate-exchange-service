@@ -18,7 +18,7 @@
 |------------------|:--------------|:-------------------------------------------------------------|
 |User Registration |POST           |``http://localhost:8080/register``                            |
 |Login             |POST           |``http://localhost:8080/login``                               |
-|IDR Exchange Rate |GET            |``http://localhost:9000/api/idr/rate/exchange/{countryName}`` |
+|IDR Exchange Rate |GET            |``http://localhost:8080/api/idr/rate/exchange/{countryName}`` |
 
 
 #### ``http://localhost:8080/register``
@@ -58,7 +58,7 @@ Response:
 }
 ````
 
-#### ``http://localhost:9000/api/idr/rate/exchange/{countryName}``
+#### ``http://localhost:8080/api/idr/rate/exchange/{countryName}``
 
 Request:
 ````
