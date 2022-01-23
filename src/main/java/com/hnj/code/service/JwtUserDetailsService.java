@@ -36,7 +36,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
-    public RegistrationResponse save(UserRequest userRequest) {
+    public RegistrationResponse userRegistration(UserRequest userRequest) {
         RegistrationResponse registrationResponse = RegistrationResponse.builder().email(userRequest.getEmail()).status(false).build();
         User newUser = new User();
         newUser.setUsername(userRequest.getEmail());

@@ -27,6 +27,9 @@ public class JwtTokenUtil implements Serializable {
     private static final long JWT_TOKEN_VALIDITY = 10 * 60;
     private static final String SUCCESS = "Success";
 
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer ";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(RateExchangeServiceImpl.class);
 
     @Autowired
@@ -37,7 +40,7 @@ public class JwtTokenUtil implements Serializable {
 
     public AuthenticatedUserInfo getAuthUserInfo(HttpServletRequest httpServletRequest) {
 
-        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+        String authorizationHeader = httpServletRequest.getHeader(AUTHORIZATION);
         String userEmail;
         String jwt;
 
@@ -107,7 +110,7 @@ public class JwtTokenUtil implements Serializable {
 
     private boolean authorizationHeaderIsInvalid(String authorizationHeader) {
         return authorizationHeader == null
-                || !authorizationHeader.startsWith("Bearer ");
+                || !authorizationHeader.startsWith(BEARER);
     }
 }
 

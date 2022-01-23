@@ -22,7 +22,7 @@ public class CurrencyExchangeApplicationTests {
 		UserRequest userRequest = new UserRequest();
 		userRequest.setEmail("ja@gmail.com");
 		userRequest.setPass("1111");
-		RegistrationResponse registrationResponse = userDetailsService.save(userRequest);
+		RegistrationResponse registrationResponse = userDetailsService.userRegistration(userRequest);
 		Assert.assertEquals(true,registrationResponse.isStatus());
 	}
 }

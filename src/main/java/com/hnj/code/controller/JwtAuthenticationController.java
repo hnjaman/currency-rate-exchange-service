@@ -35,7 +35,7 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public RegistrationResponse saveUser(@RequestBody UserRequest userRequest) throws Exception {
-        return userDetailsService.save(userRequest);
+        return userDetailsService.userRegistration(userRequest);
     }
 
     private void authenticate(String username, String password) throws Exception {
