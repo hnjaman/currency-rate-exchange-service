@@ -18,7 +18,7 @@ Open terminal and run
 ````
 git clone https://github.com/hnjaman/currency-rate-exchange-service.git
 ````
-In your current directory ``social-media`` directory will be created.
+In your current directory ``currency-rate-exchange-service`` directory will be created.
 
 ### 2. What to install in your environment 
 1. Java 8 or higher version 
@@ -43,7 +43,7 @@ mvn spring-boot:run
 |IDR Exchange Rate |GET            |``http://localhost:8080/api/idr/rate/exchange/{countryName}`` |
 
 
-#### ``http://localhost:8080/register``
+#### 1. ``http://localhost:8080/register``
 
 Request:
 ````
@@ -63,7 +63,7 @@ Response:
 ````
 
 
-#### ``http://localhost:8080/login``
+#### 2. ``http://localhost:8080/login``
 
 Request:
 ````
@@ -80,7 +80,7 @@ Response:
 }
 ````
 
-#### ``http://localhost:8080/api/idr/rate/exchange/{countryName}``
+#### 3. ``http://localhost:8080/api/idr/rate/exchange/{countryName}``
 
 Request:
 ````
