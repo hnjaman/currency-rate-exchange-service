@@ -12,6 +12,28 @@
 - Maven
 
 
+## System configuration prerequisites to run the application
+### 1. Clone the project
+Open terminal and run
+````
+git clone https://github.com/hnjaman/currency-rate-exchange-service.git
+````
+In your current directory ``social-media`` directory will be created.
+
+### 2. What to install in your environment 
+1. Java 8 or higher version 
+2. Apache Maven 
+3. MySQL
+
+
+## Run the application
+````
+cd currency-rate-exchange-service/
+mvn clean install
+mvn spring-boot:run
+````
+
+
 ### API details
 
 | API              | REST Method   | API endpoints                                                |
