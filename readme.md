@@ -26,14 +26,15 @@ git clone https://github.com/hnjaman/currency-rate-exchange-service.git
 In your current directory ``currency-rate-exchange-service`` directory will be created.
 
 
-### Step 2: Run the application
+### Step 2: Run the application in docker
 Move to ``currency-rate-exchange-service`` directory and enter below command from your terminal 
 ````
 docker-compose up
 ````
-
-The above command will pull mysql:8 and currency-rate-exchange-service docker image from docker hub and deploy 
- two separate container in your docker environment. 
+#### What will happen now ?
+1. Pull ```openjdk:8``` docker image, build ```currency-rate-exchange-service``` spring boot application locally and make a docker image.
+2. Pull ```mysql:8``` docker image.
+3. Deploy above two docker image in two separate docker container in your docker environment.
 
 ##### Congratulations! Now the application is ready to use.
 

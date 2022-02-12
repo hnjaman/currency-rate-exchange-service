@@ -1,16 +1,23 @@
-version: "3.6"
+version: "3"
 services:
-  mysqldb:
-    image: mysql:8
-    environment:
-      - MYSQL_ROOT_PASSWORD=1111
-      - MYSQL_DATABASE=rate_exchange  
-      
-  currency-rate-exchange-service:
-    image: hnjaman/currency-rate-exchange-service:latest
+  currency-exchange-spring-boot-backend:
+    image: currency-exchange-spring-boot-backend
+    restart: always
+    build: .
     ports:
-      - "8080:8080"
+      - 8080:8080
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://currency-rate-exchange-service_mysqldb_1/rate_exchange?createDatabaseIfNotExist=true&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
-    depends_on:
-      - mysqldb
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1111
+      MYSQL_PORT: 3306
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8
+    volumes:
+      -  /home/user/Desktop/db:/var/lib/mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: rate_exchange
+      MYSQL_ROOT_PASSWORD: 1111
