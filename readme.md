@@ -35,7 +35,7 @@ docker-compose up
 The above command will pull mysql:8 and currency-rate-exchange-service docker image from docker hub and deploy 
  two separate container in your docker environment. 
 
-######Now the application is ready to use.
+##### Congratulations! Now the application is ready to use.
 
 
 ### API details
