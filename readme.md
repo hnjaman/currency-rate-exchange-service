@@ -10,37 +10,41 @@
 - MYSQL
 - Logback
 - Maven
+- Docker
 
 
 ## System configuration prerequisites to run the application
-### 1. Clone the project
+### What should be installed in your machine -
+1. Docker
+
+
+### Step 1: Clone the project
 Open terminal and run
 ````
 git clone https://github.com/hnjaman/currency-rate-exchange-service.git
 ````
 In your current directory ``currency-rate-exchange-service`` directory will be created.
 
-### 2. What to install in your environment 
-1. Java 8 or higher version 
-2. Apache Maven 
-3. MySQL
 
+### Step 2: Run the application
+Move to ``currency-rate-exchange-service`` directory and enter below command from your terminal 
+````
+docker-compose up
+````
 
-## Run the application
-````
-cd currency-rate-exchange-service/
-mvn clean install
-mvn spring-boot:run
-````
+The above command will pull mysql:8 and currency-rate-exchange-service docker image from docker hub and deploy 
+ two separate container in your docker environment. 
+
+######Now the application is ready to use.
 
 
 ### API details
 
-| API              | REST Method   | API endpoints                                                |
-|------------------|:--------------|:-------------------------------------------------------------|
-|User Registration |POST           |``http://localhost:8080/register``                            |
-|Login             |POST           |``http://localhost:8080/login``                               |
-|IDR Exchange Rate |GET            |``http://localhost:8080/api/idr/rate/exchange/{countryName}`` |
+|No.| API              | REST Method   | API endpoints                                                |
+|---|:-----------------|:--------------|:-------------------------------------------------------------|
+|1  |User Registration |POST           |``http://localhost:8080/register``                            |
+|2  |Login             |POST           |``http://localhost:8080/login``                               |
+|3  |IDR Exchange Rate |GET            |``http://localhost:8080/api/idr/rate/exchange/{countryName}`` |
 
 
 #### 1. ``http://localhost:8080/register``
